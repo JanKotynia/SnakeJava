@@ -69,12 +69,25 @@ public class PlayManager {
                 int temp_x = snake.sTab.getLast().pos_x;
                 int temp_y = snake.sTab.getLast().pos_y;
 
-                f.newPosition();
+                do{
+                    f.newPosition();
+                }while (!checkPosition(f.pos_x,f.pos_y));
+
                 PartsOfSnake newbody = new PartsOfSnake(temp_x,temp_y);
                 snake.sTab.add(newbody);
                 sTmp.add(new PartsOfSnake(temp_x, temp_y));
                 snake.setTail();
             }
+    }
+
+    private boolean checkPosition(int x, int y)
+    {
+        for(int i=0;i<snake.sTab.size();i++)
+        {
+            if(snake.sTab.get(i).pos_x == x && snake.sTab.get(i).pos_y == y)
+                return false;
+        }
+        return true;
     }
 
     private void move(int direction)
